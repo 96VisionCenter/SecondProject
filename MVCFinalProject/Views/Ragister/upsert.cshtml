@@ -1,0 +1,93 @@
+﻿@model MVCFinalProject.Models.Ragister
+@{
+    ViewBag.Title = "upsert   ";
+    var title = Model.id != 0 ? "Edit User" : "New User";
+    var SaveUpdate = Model.id != 0 ? "Update" : "Save";
+
+}
+
+
+<h2 class="text-primary text-center">@title</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address)
+            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @*<label class="col-lg-2 control-label">Radios</label>*@
+            @Html.LabelFor(m => m.Gender)
+            @*<div classk="col-lg-10">*@
+            <div class="radio">
+                <label>
+                    @Html.RadioButtonFor(m => m.Gender, "Male")
+                    @*<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">*@
+
+
+                    Male
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    @*<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">*@
+                    @Html.RadioButtonFor(m => m.Gender, "Female")
+
+                    Female
+                </label>
+
+            </div>
+
+        </div>
+        <div class="form-group">
+            @*<label for="inpuktPassword" class="col-lg-2 control-label">Password</label>*@
+            @*<div class="col-lg-10">*@
+                @*<input type="password" class="form-control" id="inputPassword" placeholder="Password">*@
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.Subscribe) Is subscribe
+                        @*<input type="checkbox">*@
+                    </label>
+                </div>
+            @*</div>*@
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Countryid)
+            @Html.DropDownListFor(m => m.Countryid, new SelectList(ViewBag.Countrylist, "id", "Name"), "Select Country", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Countryid,"", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Stateid)
+            @Html.DropDownListFor(m => m.Stateid, new SelectList(ViewBag.StateList, "id", "Name"), "Select State", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Stateid, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Cityid)
+            @Html.DropDownListFor(m => m.Cityid, new SelectList(ViewBag.CityList, "id", "Name"), "Select City", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Cityid, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">@SaveUpdate</button>
+        </div>
+    </div>
+
+
+}
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MVCFinalProject.Models.Ragister>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="text-primary text-center"> UserList</h2>
+@Html.ActionLink("New User", "upsert", "Ragister", new { @class = "btn btn-info" })
+<br />
+<br />
+@if (!Model.Any())
+{
+
+    <h2 class="text-danger">No Data found</h2>
+}
+else
+{
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+                <th>Subscribe</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Actions</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                using (Html.BeginForm("Delete", "Ragister", new { id = user.id }))
+                {
+                    <tr>
+                        <td>@user.Name</td>
+                        <td>@user.Address</td>
+                        <td>@user.Email</td>
+                        <td>@user.Gender</td>
+                        @*<td>@user.Subscribe</td>*@
+                        <td>@Html.DisplayFor(m=>user.Subscribe)</td>
+                        <td>@user.City.State.Country.Name</td>
+                        <td>@user.City.State.Name</td>
+                        <td>@user.City.Name</td>
+                        <td>
+                            @Html.ActionLink("Edit", "upsert", new { id = user.id }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("Details", "Details", new { id = user.id }, new { @class = "btn btn-success" })
+                            <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Want to Delete Data')" />
+                        </td>
+
+
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+
+}
+

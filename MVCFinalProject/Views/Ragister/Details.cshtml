@@ -1,0 +1,37 @@
+﻿@model MVCFinalProject.Models.Ragister     
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="text-primary text-center">User Details</h2>
+<table class="table-bordered table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Subscribe</th>
+            <th>Country</th>
+            <th>State</th>
+            <th>City</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Name</td>
+            <td>@Model.Address</td>
+            <td>@Model.Email</td>
+            <td>@Model.Gender</td>
+            <td>@Html.DisplayFor(m=>m.Subscribe)</td>
+            <td>@Model.City.State.Country.Name</td>
+            <td>@Model.City.State.Name</td>
+            <td>@Model.City.Name</td>
+
+        </tr>
+    </tbody>
+</table>
+@Html.ActionLink("Edit", "upsert", new {id=Model.id})<br />
+@Html.ActionLink("Back to list","Index")
+
